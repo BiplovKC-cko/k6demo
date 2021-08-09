@@ -16,7 +16,7 @@ export const options = {
     test: {
       executor: "constant-arrival-rate",
       rate: 10,
-      timeUnit: "2s",
+      timeUnit: "1s",
       duration: "10s",
       preAllocatedVUs: 1,
       maxVUs: 10,
@@ -25,7 +25,7 @@ export const options = {
       executor: "constant-arrival-rate",
       rate: 15,
       exec: "foo",
-      timeUnit: "2s",
+      timeUnit: "1s",
       duration: "10s",
       preAllocatedVUs: 1,
       maxVUs: 10,
