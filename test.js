@@ -21,6 +21,15 @@ export const options = {
       preAllocatedVUs: 1,
       maxVUs: 10,
     },
+    foo: {
+      executor: "constant-arrival-rate",
+      rate: 15,
+      exec: "foo",
+      timeUnit: "2s",
+      duration: "10s",
+      preAllocatedVUs: 1,
+      maxVUs: 10,
+    },
   },
   thresholds: {
     failed_requests: ["rate<=0"],
@@ -30,8 +39,24 @@ export const options = {
 export default function () {
   const result = http.get("https://test-api.k6.io");
 
-  check(result, {
-    "Response code is 200": (r) => r.status === 200,
-  });
+  checkResult(result, "default", 200);
   failures.add(result.status != 200);
+}
+
+export function foo() {
+  const result = http.get("https://test-api.k6.io");
+
+  checkResult(result, "foo", 200);
+  failures.add(result.status != 200);
+}
+
+function checkResult(res, tag, resCode) {
+  check(
+    res,
+    {
+      ["status " + tag + " is " + resCode + " (OK)"]: (r) =>
+        r.status === resCode,
+    },
+    { my_tag: tag }
+  );
 }
