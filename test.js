@@ -5,9 +5,11 @@ import { Rate } from "k6/metrics";
 const failures = new Rate("failed requests");
 
 export const options = {
+  vus: 10,
+  duration: "5s",
   thresholds: {
     failed_requests: ["rate<=0"],
-    http_req_duration: ["p(95)<100"],
+    http_req_duration: ["p(95)<100", "p(99)<700"],
   },
 };
 export default function () {
