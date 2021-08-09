@@ -1,5 +1,5 @@
 # k6demo
-K6 demo targeting Worldpay/Vantiv api
+K6 demo targeting test api provided by k6
 Useful Links:
 
 How to install K6: https://k6.io/docs/getting-started/installation/
