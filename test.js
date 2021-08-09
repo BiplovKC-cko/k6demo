@@ -9,11 +9,19 @@ export const options = {
     loadimpact: {
       projectID: 3456059,
       name: `Biplov Test`,
-      note: "Toxiproxy latency was set to 1 seconds and jitter was set to 500 milliseconds", // this does not work atm
+      note: "Hello world", // this does not work atm
     },
   },
-  vus: 10,
-  duration: "5s",
+  scenarios: {
+    test: {
+      executor: "constant-arrival-rate",
+      rate: 10,
+      timeUnit: "2s",
+      duration: "10s",
+      preAllocatedVUs: 1,
+      maxVUs: 10,
+    },
+  },
   thresholds: {
     failed_requests: ["rate<=0"],
     http_req_duration: ["p(95)<500", "p(99)<700"],
